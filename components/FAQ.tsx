@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle, MessageCircle, BookOpen } from 'lucide-react';
+import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 
 interface FAQItem {
   id: string;
@@ -66,7 +66,7 @@ const FAQ = () => {
       id: '9',
       category: 'Referrals',
       question: 'How does the referral program work?',
-      answer: 'Our referral program offers up to 20% commission on your referrals\' investments. The more people you refer, the higher your commission rate becomes. Commissions are paid daily to your account.'
+      answer: 'Our referral program offers up to 20% commission on your referrals&apos; investments. The more people you refer, the higher your commission rate becomes. Commissions are paid daily to your account.'
     },
     {
       id: '10',
@@ -187,7 +187,7 @@ const FAQ = () => {
               STILL HAVE <span className="text-lime-400">QUESTIONS?</span>
             </h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Can't find the answer you're looking for? Our expert customer support 
+              Can&apos;t find the answer you&apos;re looking for? Our expert customer support 
               team is here to help you 24/7 with personalized assistance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

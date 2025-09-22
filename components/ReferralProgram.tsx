@@ -1,25 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Users, Copy, Check, Share2, DollarSign, Link, Gift, Star, Trophy, Award } from 'lucide-react';
-
-interface ReferralPackage {
-  name: string;
-  earnings: string;
-  directReferrals: string;
-  indirectReferrals: string;
-  teamReferrals: string;
-  benefits: string[];
-  icon: any;
-  popular?: boolean;
-}
+import React from 'react';
+import { Users, Check, Share2, DollarSign, Gift, Star, Trophy, Award } from 'lucide-react';
 
 const ReferralProgram = () => {
-  const [copied, setCopied] = useState(false);
-  
-  const referralCode = 'FOMO-REF-123456';
-  const referralLink = `https://fomof.net/register?ref=${referralCode}`;
-
   const referralPackages = [
     {
       name: 'Silver Package',
@@ -56,7 +40,7 @@ const ReferralProgram = () => {
       step: 1,
       title: 'Copy Link',
       description: 'Copy your personalized referral link from your dashboard',
-      icon: Copy,
+      icon: Share2,
       category: 'Setup'
     },
     {
@@ -81,16 +65,6 @@ const ReferralProgram = () => {
       category: 'Rewards'
     }
   ];
-
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
 
   return (
     <section className="bg-black py-20 relative overflow-hidden">
@@ -167,7 +141,7 @@ const ReferralProgram = () => {
               </div>
               <h4 className="text-white font-bold text-lg mb-2">Team Rewards</h4>
               <p className="text-gray-400 text-sm">
-                Bonus earnings from your extended team's performance
+                Bonus earnings from your extended team&apos;s performance
               </p>
             </div>
           </div>
@@ -196,7 +170,7 @@ const ReferralProgram = () => {
             <div className="hidden lg:block absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-lime-400/20 via-lime-400/40 to-lime-400/20"></div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {steps.map((step, index) => {
+              {steps.map((step) => {
                 const IconComponent = step.icon;
                 return (
                   <div key={step.step} className="relative group">
@@ -258,11 +232,11 @@ const ReferralProgram = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {referralPackages.map((pkg, index) => {
+            {referralPackages.map((pkg) => {
               const IconComponent = pkg.icon;
               return (
                 <div
-                  key={index}
+                  key={pkg.name}
                   className={`bg-black border rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group hover:scale-105 transform relative h-full flex flex-col ${
                     pkg.popular 
                       ? 'border-lime-400 shadow-lg shadow-lime-400/10' 

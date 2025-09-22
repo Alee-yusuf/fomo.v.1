@@ -1,4 +1,4 @@
-import Button from './ui/Button';
+
 import Image from 'next/image';
 
 const Hero: React.FC = () => {
@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
             {/* Description */}
             <p className="text-gray-300 text-lg leading-relaxed max-w-md">
               FastFit is built for beginners and powered by pro traders. Choose from flexible 
-              plans, tap daily to mine, bet earn rewards, gain, and reward because it's simple 
+              plans, tap daily to mine, bet earn rewards, gain, and reward because it&apos;s simple 
               to use and profitable to earn.
             </p>
 

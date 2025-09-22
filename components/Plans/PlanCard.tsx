@@ -1,7 +1,7 @@
 // Enhanced PlanCard with modern UI improvements
 // Features: Glassmorphism design, smooth animations, better visual hierarchy
 
-import Button from '../ui/Button';
+
 import Icon from '../ui/Icon';
 import { FiCheck, FiStar, FiTrendingUp, FiClock, FiDollarSign } from 'react-icons/fi';
 

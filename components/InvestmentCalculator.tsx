@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -189,20 +189,20 @@ export default function InvestmentCalculator() {
   const [investmentAmount, setInvestmentAmount] = useState<number>(20);
   const [startDate, setStartDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [endDate, setEndDate] = useState<string>('');
-  const [chartData, setChartData] = useState<any>(null);
+  const [chartData, setChartData] = useState<{
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      borderColor: string;
+      backgroundColor: string;
+      borderWidth: number;
+      fill: boolean;
+      tension: number;
+    }[];
+  } | null>(null);
 
-  useEffect(() => {
-    const start = new Date(startDate);
-    const end = new Date(start);
-    end.setDate(start.getDate() + selectedPlan.duration);
-    setEndDate(end.toISOString().split('T')[0]);
-  }, [startDate, selectedPlan]);
-
-  useEffect(() => {
-    generateChartData();
-  }, [selectedPlan, investmentAmount, startDate]);
-
-  const generateChartData = () => {
+  const generateChartData = useCallback(() => {
     const labels = [];
     const data = [];
     let currentAmount = investmentAmount;
@@ -227,7 +227,18 @@ export default function InvestmentCalculator() {
         },
       ],
     });
-  };
+  }, [selectedPlan.duration, selectedPlan.dailyCoins, investmentAmount]);
+
+  useEffect(() => {
+    const start = new Date(startDate);
+    const end = new Date(start);
+    end.setDate(start.getDate() + selectedPlan.duration);
+    setEndDate(end.toISOString().split('T')[0]);
+  }, [startDate, selectedPlan]);
+
+  useEffect(() => {
+    generateChartData();
+  }, [selectedPlan, investmentAmount, startDate, generateChartData]);
 
   const calculateStats = () => {
     const dailyEarning = selectedPlan.dailyCoins;

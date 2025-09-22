@@ -3,9 +3,7 @@
 import React, { useState } from 'react';
 import { Mail, Check, AlertCircle, TrendingUp, Gift, BookOpen, Users } from 'lucide-react';
 
-interface NewsletterForm {
-  email: string;
-}
+
 
 const NewsletterSubscribe = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -39,7 +37,7 @@ const NewsletterSubscribe = () => {
       console.log('Newsletter subscription:', { email });
       setIsSubmitted(true);
       setEmail('');
-    } catch (err) {
+    } catch {
       setError('Failed to subscribe. Please try again.');
     } finally {
       setIsLoading(false);
@@ -58,7 +56,7 @@ const NewsletterSubscribe = () => {
               SUCCESSFULLY <span className="text-lime-400">SUBSCRIBED!</span>
             </h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Thank you for joining the FOMOFI community! You'll receive exclusive investment insights, 
+              Thank you for joining the FOMOFI community! You&apos;ll receive exclusive investment insights, 
               market updates, and premium offers directly in your inbox.
             </p>
             <button 
@@ -102,7 +100,7 @@ const NewsletterSubscribe = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Benefits */}
             <div>
-              <h3 className="text-xl font-bold text-white mb-6">What You'll Receive:</h3>
+              <h3 className="text-xl font-bold text-white mb-6">What You&apos;ll Receive:</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-lime-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -156,7 +154,7 @@ const NewsletterSubscribe = () => {
                   </div>
                   <div>
                     <p className="text-white font-semibold">Join 10,000+ Smart Investors</p>
-                    <p className="text-gray-400 text-sm">Who trust FOMOFI for market insights</p>
+                    <p className="text-gray-400 text-sm">Who trust FOMOFI&apos;s investment platform</p>
                   </div>
                 </div>
               </div>

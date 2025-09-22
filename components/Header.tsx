@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Button from './ui/Button';
+
 import Icon from './ui/Icon';
 import { FiMenu, FiX } from 'react-icons/fi';
 

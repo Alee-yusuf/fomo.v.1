@@ -3,17 +3,7 @@
 import React, { useState } from 'react';
 import { Star, ChevronLeft, ChevronRight, Users, DollarSign, TrendingUp, Shield } from 'lucide-react';
 
-interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  avatar: string;
-  rating: number;
-  content: string;
-  investment: string;
-  returns: string;
-  duration: string;
-}
+
 
 const Testimonials = () => {
   const [testimonials] = useState([
@@ -23,7 +13,7 @@ const Testimonials = () => {
       role: 'Professional Trader',
       avatar: 'SJ',
       rating: 5,
-      content: 'The platform has exceeded my expectations. The returns are consistent and the customer support is exceptional. I\'ve been investing for 8 months now and couldn\'t be happier.',
+      content: 'The platform has exceeded my expectations. The returns are consistent and the customer support is exceptional. I&apos;ve been investing for 8 months now and couldn&apos;t be happier.',
       investment: '$5,000',
       returns: '$1,200',
       duration: '8 months'
@@ -34,7 +24,7 @@ const Testimonials = () => {
       role: 'Software Engineer',
       avatar: 'MC',
       rating: 5,
-      content: 'As a tech professional, I appreciate the platform\'s security measures and user interface. The mobile app makes it easy to track my investments on the go.',
+      content: 'As a tech professional, I appreciate the platform&apos;s security measures and user interface. The mobile app makes it easy to track my investments on the go.',
       investment: '$2,500',
       returns: '$450',
       duration: '4 months'
@@ -67,7 +57,7 @@ const Testimonials = () => {
       role: 'Marketing Manager',
       avatar: 'LP',
       rating: 5,
-      content: 'The transparency and regular communication from the team builds trust. I\'ve referred several colleagues and they\'re all satisfied with their investments.',
+      content: 'The transparency and regular communication from the team builds trust. I&apos;ve referred several colleagues and they&apos;re all satisfied with their investments.',
       investment: '$3,200',
       returns: '$640',
       duration: '6 months'
@@ -125,7 +115,7 @@ const Testimonials = () => {
             WHAT OUR <span className="text-lime-400">INVESTORS SAY</span>
           </h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our satisfied investors 
+            Don&apos;t just take our word for it. Here&apos;s what our satisfied investors 
             have to say about their experience with FOMOFI.
           </p>
         </div>
@@ -133,7 +123,7 @@ const Testimonials = () => {
         {/* Testimonials Grid */}
         <div className="relative mb-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {visibleTestimonials.map((testimonial, index) => (
+            {visibleTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
                 className="bg-black border border-lime-400/30 rounded-xl p-6 hover:border-lime-400 hover:shadow-lg hover:shadow-lime-400/10 transition-all duration-300 group hover:scale-105 transform h-full flex flex-col"
@@ -148,7 +138,7 @@ const Testimonials = () => {
 
                 {/* Content */}
                 <blockquote className="text-gray-300 mb-6 leading-relaxed flex-grow group-hover:text-gray-200 transition-colors duration-300">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </blockquote>
 
                 {/* Author */}

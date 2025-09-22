@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './ui/Button';
 import Icon from './ui/Icon';
-import { FiMail, FiUser, FiMessageSquare, FiCheck, FiAlertCircle } from 'react-icons/fi';
+import { FiMail, FiMessageSquare, FiCheck, FiAlertCircle } from 'react-icons/fi';
 
 interface ContactFormData {
   name: string;
@@ -49,7 +49,7 @@ const ContactForm: React.FC = () => {
       console.log('Contact form submission:', data);
       setIsSubmitted(true);
       reset();
-    } catch (err) {
+    } catch {
       setError('Failed to send message. Please try again or contact us directly.');
     } finally {
       setIsLoading(false);
@@ -68,7 +68,7 @@ const ContactForm: React.FC = () => {
               Message Sent Successfully!
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Thank you for contacting us. We've received your message and will get back to you 
+              Thank you for contacting us. We&apos;ve received your message and will get back to you 
               within 24 hours. For urgent matters, please use our live chat support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -101,7 +101,7 @@ const ContactForm: React.FC = () => {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Have questions about our investment platform? Need technical support? 
-            We're here to help. Send us a message and we'll respond promptly.
+            We&apos;re here to help. Send us a message and we&apos;ll respond promptly.
           </p>
         </div>
 

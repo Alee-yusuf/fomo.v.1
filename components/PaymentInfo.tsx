@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import { CreditCard, Shield, Clock, Info, Copy, Check, DollarSign, Zap, Lock, Eye, AlertTriangle, QrCode } from 'lucide-react';
+import React from 'react';
+import { CreditCard, Shield, Clock, DollarSign, Zap, Lock, Eye, AlertTriangle, QrCode } from 'lucide-react';
 
 const PaymentInfo = () => {
-  const [copied, setCopied] = useState(false);
-  const sampleAddress = 'TQn9Y2khEsLMWD8uMCu...3K8xmLdVf5Xp';
+
 
   const paymentMethods = [
     {
@@ -59,15 +58,7 @@ const PaymentInfo = () => {
     { name: 'Insurance Coverage', icon: Shield }
   ];
 
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
+
 
   return (
     <section className="bg-black py-20 relative overflow-hidden">
@@ -212,7 +203,7 @@ const PaymentInfo = () => {
             <div className="hidden lg:block absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-lime-400/20 via-lime-400/40 to-lime-400/20"></div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {depositSteps.map((step, index) => {
+              {depositSteps.map((step) => {
                 const IconComponent = step.icon;
                 return (
                   <div key={step.step} className="relative group">
