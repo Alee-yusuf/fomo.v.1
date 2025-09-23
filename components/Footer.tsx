@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto">
         {/* Rounded container with dark background */}
         <div className="bg-[#1a1a1a] rounded-2xl p-8">
-          <div className="flex flex-col lg:flex-row justify-center gap-5">
+          <div className="flex flex-col lg:flex-row justify-around gap-5">
             {/* Left Side - Brand and Contact Info */}
             <div className="flex-1 max-w-xs lg:border-r lg:border-gray-600 lg:pr-4">
               <h3 className="text-xl font-bold mb-6 text-white">FomoFi</h3>
