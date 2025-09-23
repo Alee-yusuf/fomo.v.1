@@ -139,14 +139,14 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, onSelect }) => {
 
         {/* Features List */}
         <div className="mb-8">
-          <h4 className="text-white font-semibold mb-4 flex items-center">
-            <FiCheck className="w-4 h-4 mr-2 text-green-400" />
+          <h4 className="text-white font-semibold mb-4">
             Features
           </h4>
           <ul className="space-y-3">
             {features.map((feature, index) => (
-              <li key={index} className="text-gray-300 text-sm flex items-start">
+              <li key={index} className="text-gray-300 text-sm flex items-center">
                 <div className={`w-1.5 h-1.5 rounded-full ${theme.accent} mt-2 mr-3 flex-shrink-0`}></div>
+                 <FiCheck className="w-4 h-4 mr-2 text-green-400" />
                 <span>{feature}</span>
               </li>
             ))}
