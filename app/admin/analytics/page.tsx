@@ -50,7 +50,13 @@ const AnalyticsDashboard: React.FC = () => {
     ]
   };
 
-  const StatCard = ({ title, value, growth, icon: Icon, color }: any) => (
+  const StatCard = ({ title, value, growth, icon: Icon, color }: {
+    title: string;
+    value: string | number;
+    growth: number;
+    icon: React.ComponentType<{ className?: string }>;
+    color: string;
+  }) => (
     <div className="rounded-2xl border border-gray-600/30 backdrop-blur-sm bg-black/40 p-6">
       <div className="flex items-center justify-between mb-4">
         <div className={`p-3 ${color} rounded-lg`}>

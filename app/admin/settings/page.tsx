@@ -105,12 +105,12 @@ const AdminSettings: React.FC = () => {
       ...prev,
       [category]: {
         ...prev[category],
-        [setting]: !(prev[category] as any)[setting]
+        [setting]: !(prev[category] as Record<string, unknown>)[setting]
       }
     }));
   };
 
-  const updateSetting = (category: keyof SettingsState, setting: string, value: any) => {
+  const updateSetting = (category: keyof SettingsState, setting: string, value: string | number | boolean) => {
     setSettings(prev => ({
       ...prev,
       [category]: {

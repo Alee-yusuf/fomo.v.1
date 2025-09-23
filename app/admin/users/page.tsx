@@ -19,7 +19,7 @@ const UserManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
-  const [showBulkActions, setShowBulkActions] = useState(false);
+
 
   const users: User[] = [
     {

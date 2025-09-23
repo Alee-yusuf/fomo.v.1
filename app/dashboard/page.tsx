@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
       {/* Welcome Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-gray-400">Welcome back! Here's your mining overview.</p>
+        <p className="text-gray-400">Welcome back! Here&apos;s your mining overview.</p>
       </div>
 
       {/* Stats Cards */}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FiCopy, FiShare2, FiSend, FiUsers, FiDollarSign, FiTrendingUp, FiAward } from 'react-icons/fi';
+import { FiCopy, FiShare2, FiSend, FiUsers, FiDollarSign, FiAward } from 'react-icons/fi';
 import Icon from '@/components/ui/Icon';
 
 const Referrals: React.FC = () => {
@@ -241,7 +241,7 @@ const Referrals: React.FC = () => {
           <div className="space-y-4">
             <div className="bg-gray-800/30 rounded-lg p-4">
               <h3 className="text-lime-400 font-semibold mb-2">Direct Referral Bonus</h3>
-              <p className="text-gray-300 text-sm">Earn 10% commission from your direct referrals' investments</p>
+              <p className="text-gray-300 text-sm">Earn 10% commission from your direct referrals&apos; investments</p>
             </div>
             
             <div className="bg-gray-800/30 rounded-lg p-4">
@@ -256,7 +256,7 @@ const Referrals: React.FC = () => {
             
             <div className="bg-gray-800/30 rounded-lg p-4">
               <h3 className="text-purple-400 font-semibold mb-2">Team Bonus</h3>
-              <p className="text-gray-300 text-sm">Additional rewards based on your team's performance</p>
+              <p className="text-gray-300 text-sm">Additional rewards based on your team&apos;s performance</p>
             </div>
           </div>
 

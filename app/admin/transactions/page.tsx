@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FiSearch, FiFilter, FiDownload, FiEye, FiCheck, FiX, FiClock, FiTrendingUp, FiTrendingDown, FiDollarSign } from 'react-icons/fi';
+import { FiSearch, FiDownload, FiEye, FiCheck, FiX, FiClock, FiTrendingUp, FiTrendingDown, FiDollarSign } from 'react-icons/fi';
 
 interface Transaction {
   id: string;

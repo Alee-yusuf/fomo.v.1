@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { FiMenu, FiX, FiHome, FiUser, FiUsers, FiCreditCard, FiDownload, FiUpload, FiLogOut } from 'react-icons/fi';
-import Icon from '@/components/ui/Icon';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

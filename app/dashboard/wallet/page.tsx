@@ -1,8 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { FiPlus, FiEye, FiEyeOff, FiTrendingUp, FiTrendingDown, FiClock, FiCheck } from 'react-icons/fi';
+import { FiPlus, FiEye, FiEyeOff, FiTrendingUp, FiClock } from 'react-icons/fi';
 import Icon from '@/components/ui/Icon';
+
+interface ActivityHistory {
+  date: string;
+  type: 'deposit' | 'withdrawal' | 'referral' | 'mining';
+  amount: number;
+  status: 'completed' | 'pending' | 'failed';
+}
 
 const Wallet: React.FC = () => {
   const [showBalance, setShowBalance] = useState(true);
@@ -72,7 +79,7 @@ const Wallet: React.FC = () => {
     { value: 'bnb', label: 'Binance Coin (BNB)', icon: 'B' },
   ];
 
-  const activityHistory = [
+  const activityHistory: ActivityHistory[] = [
     // Empty for now - will be populated with real data
   ];
 

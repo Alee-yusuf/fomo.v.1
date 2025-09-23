@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FiSearch, FiFilter, FiDownload, FiEye, FiCheck, FiX, FiClock, FiAlertTriangle, FiUser, FiDollarSign } from 'react-icons/fi';
+import { FiSearch, FiDownload, FiEye, FiCheck, FiX, FiClock, FiAlertTriangle, FiDollarSign } from 'react-icons/fi';
 
 interface WithdrawalRequest {
   id: string;
@@ -24,7 +24,6 @@ const WithdrawalsManagement: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [selectedRequests, setSelectedRequests] = useState<string[]>([]);
-  const [showApprovalModal, setShowApprovalModal] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<WithdrawalRequest | null>(null);
 
   const withdrawalRequests: WithdrawalRequest[] = [
