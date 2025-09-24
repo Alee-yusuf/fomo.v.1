@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FiCopy, FiUpload, FiCheck, FiClock, FiX, FiAlertCircle } from 'react-icons/fi';
+import { FiCopy, FiUpload, FiCheck, FiClock, FiX, FiAlertCircle, FiCreditCard, FiFileText, FiDollarSign } from 'react-icons/fi';
 import Icon from '@/components/ui/Icon';
 
 interface Transaction {
@@ -44,18 +44,11 @@ const Deposits: React.FC = () => {
     }
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setPaymentProof(file);
-    }
-  };
-
   const handleSubmitDeposit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle deposit submission logic
     console.log('Deposit submitted:', {
-      package: selectedPackage,
+      selectedPackage,
       transactionId,
       paymentProof: paymentProof?.name
     });
@@ -74,38 +67,43 @@ const Deposits: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-white mb-2">Deposits</h1>
-            <p className="text-gray-400">Manage and track your deposits</p>
+            <p className="text-[#94a3b8]">Manage and track your deposits</p>
           </div>
           <div className="flex items-center space-x-6">
             <div className="text-right">
-              <div className="text-xs text-gray-400">Current Balance</div>
-              <div className="text-lime-400 font-bold text-lg">${currentBalance}</div>
+              <div className="text-xs text-[#94a3b8]">Current Balance</div>
+              <div className="text-[#00d4ff] font-bold text-lg">${currentBalance}</div>
             </div>
             <div className="text-right">
-              <div className="text-xs text-gray-400">Pending</div>
-              <div className="text-yellow-400 font-bold text-lg">{pendingDeposits}</div>
+              <div className="text-xs text-[#94a3b8]">Pending</div>
+              <div className="text-[#00b8e6] font-bold text-lg">{pendingDeposits}</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Deposit Address Section */}
-      <div className="rounded-2xl border border-blue-400/30 backdrop-blur-sm bg-black/40 p-6">
+      <div className="rounded-2xl border border-[#00d4ff]/20 backdrop-blur-sm bg-[#1e293b] p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white">💰 Deposit Address (USDT BEP20)</h2>
-          <div className="bg-blue-400/20 text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
+          <div className="flex items-center space-x-2">
+            <FiCreditCard className="text-[#00d4ff] w-6 h-6" />
+            <h2 className="text-xl font-bold text-white">Deposit Address (USDT BEP20)</h2>
+          </div>
+          <div className="bg-[#00d4ff]/20 text-[#00d4ff] px-3 py-1 rounded-full text-sm font-medium">
             BEP20 Network
           </div>
         </div>
         
-        <div className="bg-yellow-400/10 border border-yellow-400/30 rounded-lg p-4 mb-6">
-          <div className="flex items-start space-x-3">
-            <Icon icon={FiAlertCircle} size="sm" className="text-yellow-400 mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-yellow-400 text-sm font-medium mb-1">Important Notice</p>
-              <p className="text-gray-300 text-sm">
-                <strong>Send only USDT via BEP20 network to this address.</strong> Sending USDT via TRC20, ERC20 or other networks will result in loss of funds.
-              </p>
+        <div className="mt-6 mb-6 p-4 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-lg">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <FiAlertCircle className="h-5 w-5 text-[#00d4ff]" />
+            </div>
+            <div className="ml-3 flex-1">
+              <h3 className="text-sm font-medium text-white">Important Notice</h3>
+              <div className="mt-1 text-sm text-[#94a3b8]">
+                <p>Please ensure you are sending USDT on the BEP20 network only. Sending other tokens or using other networks may result in permanent loss of funds.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -116,14 +114,15 @@ const Deposits: React.FC = () => {
             <label className="block text-sm font-medium text-gray-300 mb-3">
               Wallet Address
             </label>
-            <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-4 mb-4">
+            <div className="bg-[#0f172a] border border-[#334155] p-4 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-white font-mono text-sm break-all">{depositAddress}</span>
+                <span className="font-mono text-gray-300 break-all">{depositAddress}</span>
                 <button
                   onClick={() => copyToClipboard(depositAddress)}
-                  className="ml-3 bg-blue-400 hover:bg-blue-500 text-white p-2 rounded-lg transition-colors flex-shrink-0"
+                  className="ml-4 p-2 rounded-lg hover:bg-[#1e4055] transition-colors"
+                  aria-label="Copy to clipboard"
                 >
-                  <Icon icon={FiCopy} size="sm" />
+                  <Icon icon={copied ? FiCheck : FiCopy} className={copied ? 'text-[#00d4ff]' : 'text-[#94a3b8] hover:text-white'} />
                 </button>
               </div>
             </div>
@@ -156,8 +155,11 @@ const Deposits: React.FC = () => {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Make a New Deposit */}
-        <div className="rounded-2xl border border-green-400/30 backdrop-blur-sm bg-black/40 p-6">
-          <h2 className="text-xl font-bold text-white mb-6">📈 Make a New Deposit</h2>
+        <div className="rounded-2xl border border-[#00d4ff]/20 backdrop-blur-sm bg-[#1e293b] p-6">
+          <div className="flex items-center space-x-2">
+            <FiDollarSign className="text-[#00d4ff] w-6 h-6" />
+            <h2 className="text-xl font-bold text-white">Submit Deposit</h2>
+          </div>
           
           <form onSubmit={handleSubmitDeposit} className="space-y-6">
             {/* Select Package */}
@@ -174,13 +176,13 @@ const Deposits: React.FC = () => {
                     className={`
                       relative p-3 rounded-lg border transition-all duration-300 text-sm font-medium
                       ${selectedPackage === pkg.value
-                        ? 'border-green-400 bg-green-400/10 text-green-400'
-                        : 'border-gray-600 bg-gray-800/30 text-gray-300 hover:border-gray-500'
+                        ? 'border-[#00d4ff] bg-[#00d4ff]/10 text-[#00d4ff]'
+                        : 'border-[#334155] bg-[#0f172a] text-[#94a3b8] hover:border-[#00d4ff]'
                       }
                     `}
                   >
                     {pkg.popular && (
-                      <div className="absolute -top-2 -right-2 bg-orange-400 text-black text-xs px-2 py-1 rounded-full font-bold">
+                      <div className="absolute -top-2 -right-2 bg-[#00d4ff] text-black text-xs px-2 py-1 rounded-full font-bold">
                         Popular
                       </div>
                     )}
@@ -199,7 +201,7 @@ const Deposits: React.FC = () => {
                 type="text"
                 value={transactionId}
                 onChange={(e) => setTransactionId(e.target.value)}
-                className="w-full bg-gray-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-colors"
+                className="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-white focus:border-[#00d4ff] focus:ring-1 focus:ring-[#00d4ff] transition-colors"
                 placeholder="Enter your transaction ID"
                 required
               />
@@ -210,21 +212,12 @@ const Deposits: React.FC = () => {
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Payment Proof
               </label>
-              <div className="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center hover:border-gray-500 transition-colors">
-                <input
-                  type="file"
-                  onChange={handleFileUpload}
-                  accept="image/*,.pdf"
-                  className="hidden"
-                  id="payment-proof"
-                />
-                <label htmlFor="payment-proof" className="cursor-pointer">
-                  <Icon icon={FiUpload} size="lg" className="text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-400 text-sm mb-1">
-                    {paymentProof ? paymentProof.name : 'Drag and drop your files or click to upload'}
-                  </p>
-                  <p className="text-gray-500 text-xs">PNG, JPG or PDF up to 10MB</p>
-                </label>
+              <div className="w-full bg-[#0f172a] border-2 border-dashed border-[#334155] rounded-lg px-4 py-10 text-center cursor-pointer hover:border-[#00d4ff] hover:bg-[#1e4055]/30 transition-colors">
+                <div className="flex flex-col items-center">
+                  <FiUpload className="text-[#00d4ff] text-2xl mb-2" />
+                  <span className="text-[#00d4ff] font-medium">Click to upload</span>
+                  <span className="text-[#94a3b8] text-sm mt-1">or drag and drop</span>
+                </div>
               </div>
             </div>
 
@@ -233,13 +226,13 @@ const Deposits: React.FC = () => {
               <button
                 type="button"
                 onClick={clearForm}
-                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-xl transition-colors"
+                className="flex-1 bg-[#334155] hover:bg-[#475569] text-white font-medium py-3 px-4 rounded-lg transition-colors"
               >
-                Clear Form
+                Cancel
               </button>
               <button
                 type="submit"
-                className="flex-1 bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
+                className="flex-1 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0077a3] text-[#0f172a] font-medium py-3 px-4 rounded-lg transition-colors hover:shadow-lg hover:shadow-[#00d4ff]/20"
               >
                 Submit Deposit
               </button>
@@ -248,41 +241,38 @@ const Deposits: React.FC = () => {
         </div>
 
         {/* Recent Transactions */}
-        <div className="rounded-2xl border border-gray-600/30 backdrop-blur-sm bg-black/40 p-6">
-          <h2 className="text-xl font-bold text-white mb-6">📊 Recent Transactions</h2>
+        <div className="rounded-2xl border border-[#00d4ff]/20 backdrop-blur-sm bg-[#1e293b] p-6">
+          <div className="flex items-center space-x-2 mb-6">
+            <FiFileText className="text-[#00d4ff] w-6 h-6" />
+            <h2 className="text-xl font-bold text-white">Recent Transactions</h2>
+          </div>
           
           {/* Table Header */}
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-600/30">
-                  <th className="text-left py-3 px-4 text-gray-400 font-medium text-sm">ID</th>
-                  <th className="text-left py-3 px-4 text-gray-400 font-medium text-sm">DATE</th>
-                  <th className="text-left py-3 px-4 text-gray-400 font-medium text-sm">AMOUNT</th>
-                  <th className="text-left py-3 px-4 text-gray-400 font-medium text-sm">STATUS</th>
+                <tr className="border-b border-[#1e4055]">
+                  <th className="text-left py-3 px-4 text-[#94a3b8] font-medium text-sm">DATE</th>
+                  <th className="text-left py-3 px-4 text-[#94a3b8] font-medium text-sm">AMOUNT</th>
+                  <th className="text-left py-3 px-4 text-[#94a3b8] font-medium text-sm">STATUS</th>
+                  <th className="text-right py-3 px-4 text-[#94a3b8] font-medium text-sm">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
                 {recentTransactions.length === 0 ? (
                   <tr>
                     <td colSpan={4} className="text-center py-12">
-                      <div className="flex flex-col items-center">
-                        <div className="w-16 h-16 bg-gray-700/50 rounded-full flex items-center justify-center mb-4">
-                          <Icon icon={FiClock} size="lg" className="text-gray-500" />
-                        </div>
-                        <h3 className="text-lg font-medium text-white mb-2">No transactions yet</h3>
-                        <p className="text-gray-400 text-sm">
-                          Your deposit history will appear here
-                        </p>
+                      <div className="mt-2 text-sm text-[#94a3b8]">
+                        No transactions yet
                       </div>
                     </td>
                   </tr>
                 ) : (
                   recentTransactions.map((transaction, index) => (
-                    <tr key={index} className="border-b border-gray-700/30 hover:bg-gray-800/20">
+                    <tr key={index} className="border-b border-[#1e4055] hover:bg-[#1e4055]/20">
                       <td className="py-4 px-4 text-white text-sm font-mono">{transaction.id}</td>
-                      <td className="py-4 px-4 text-gray-300 text-sm">{transaction.date}</td>
-                      <td className="py-4 px-4 text-green-400 text-sm font-medium">${transaction.amount}</td>
+                      <td className="py-4 px-4 text-[#94a3b8] text-sm">{transaction.date}</td>
+                      <td className="py-4 px-4 text-[#00d4ff] text-sm font-medium">${transaction.amount}</td>
                       <td className="py-4 px-4 text-sm">
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                           transaction.status === 'completed' 

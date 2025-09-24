@@ -219,8 +219,8 @@ export default function InvestmentCalculator() {
         {
           label: 'Projected Gains',
           data,
-          borderColor: '#84cc16',
-          backgroundColor: 'rgba(132, 204, 22, 0.1)',
+          borderColor: '#00d4ff',
+          backgroundColor: 'rgba(0, 212, 255, 0.1)',
           borderWidth: 2,
           fill: true,
           tension: 0.4,
@@ -295,7 +295,7 @@ export default function InvestmentCalculator() {
           color: 'rgba(255, 255, 255, 0.1)',
         },
         ticks: {
-          color: '#84cc16',
+          color: '#00d4ff',
           font: {
             size: 10,
           },
@@ -306,7 +306,7 @@ export default function InvestmentCalculator() {
           color: 'rgba(255, 255, 255, 0.1)',
         },
         ticks: {
-          color: '#84cc16',
+          color: '#00d4ff',
           font: {
             size: 10,
           },
@@ -316,14 +316,27 @@ export default function InvestmentCalculator() {
   };
 
   return (
-    <section id="calculator" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4">
+    <section id="calculator" className="py-20 relative overflow-hidden" style={{ backgroundColor: '#0f172a' }}>
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-20 w-96 h-96 rounded-full blur-3xl opacity-8" 
+             style={{ background: 'radial-gradient(circle, #00d4ff 0%, transparent 70%)' }}></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 rounded-full blur-3xl opacity-6" 
+             style={{ background: 'radial-gradient(circle, #0099cc 0%, transparent 70%)' }}></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            INVESTMENT <span className="text-lime-400">CALCULATOR</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            Investment <span style={{ 
+              background: 'linear-gradient(135deg, #00d4ff 0%, #0099cc 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>Calculator</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
             Calculate your potential earnings and plan your investment strategy with our interactive calculator.
           </p>
         </div>
@@ -331,10 +344,10 @@ export default function InvestmentCalculator() {
         {/* Main Content */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8 mb-8">
         {/* Left Panel - Select Plan */}
-        <div className="bg-black border border-lime-400/30 rounded-xl p-6 backdrop-blur-sm">
+        <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 hover:shadow-[#00d4ff]/10 transition-all duration-500">
           <div className="flex items-center mb-6">
-            <div className="w-4 h-4 bg-lime-400 rounded mr-2"></div>
-            <h3 className="text-lime-400 font-semibold text-lg">Select Plan</h3>
+            <div className="w-4 h-4 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded mr-2"></div>
+            <h3 className="text-[#00d4ff] font-semibold text-lg">Select Plan</h3>
           </div>
 
           <div className="space-y-6">
@@ -344,7 +357,7 @@ export default function InvestmentCalculator() {
               <select
                 value={selectedCategory}
                 onChange={(e) => handleCategoryChange(e.target.value)}
-                className="w-full bg-black/80 border border-lime-400/30 rounded-lg px-4 py-3 text-white focus:border-lime-400 focus:outline-none transition-all duration-300 hover:border-lime-400/50 hover:bg-black/90"
+                className="w-full bg-slate-800/80 border border-[#00d4ff]/30 rounded-lg px-4 py-3 text-white focus:border-[#00d4ff] focus:outline-none transition-all duration-300 hover:border-[#00d4ff]/50 hover:bg-slate-800/90"
               >
                 {planCategories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -360,7 +373,7 @@ export default function InvestmentCalculator() {
               <select
                 value={selectedPlan.id}
                 onChange={(e) => handlePlanChange(e.target.value)}
-                className="w-full bg-black/80 border border-lime-400/30 rounded-lg px-4 py-3 text-white focus:border-lime-400 focus:outline-none transition-all duration-300 hover:border-lime-400/50 hover:bg-black/90"
+                className="w-full bg-slate-800/80 border border-[#00d4ff]/30 rounded-lg px-4 py-3 text-white focus:border-[#00d4ff] focus:outline-none transition-all duration-300 hover:border-[#00d4ff]/50 hover:bg-slate-800/90"
               >
                 {getCurrentCategoryPlans().map((plan) => (
                   <option key={plan.id} value={plan.id}>
@@ -372,44 +385,44 @@ export default function InvestmentCalculator() {
 
             {/* Plan Details */}
             <div>
-              <label className="block text-sm text-gray-400 mb-3">Plan Details</label>
-              <div className="bg-black/60 border border-gray-600 rounded-lg px-4 py-4 space-y-2">
+              <label className="block text-sm text-slate-400 mb-3">Plan Details</label>
+              <div className="bg-slate-800/60 border border-slate-600/50 rounded-lg px-4 py-4 space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-300 text-sm">Investment:</span>
+                  <span className="text-slate-300 text-sm">Investment:</span>
                   <span className="text-white font-medium">${selectedPlan.minInvestment}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-300 text-sm">Duration:</span>
+                  <span className="text-slate-300 text-sm">Duration:</span>
                   <span className="text-white font-medium">{selectedPlan.duration} days</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-300 text-sm">Daily Coins:</span>
-                  <span className="text-lime-400 font-medium">{selectedPlan.dailyCoins}</span>
+                  <span className="text-slate-300 text-sm">Daily Coins:</span>
+                  <span className="text-[#00d4ff] font-medium">{selectedPlan.dailyCoins}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-300 text-sm">Total Coins:</span>
-                  <span className="text-lime-400 font-medium">{selectedPlan.totalCoins}</span>
+                  <span className="text-slate-300 text-sm">Total Coins:</span>
+                  <span className="text-[#00d4ff] font-medium">{selectedPlan.totalCoins}</span>
                 </div>
               </div>
             </div>
 
             {/* Plan Description */}
-            <div className="bg-lime-400/10 border border-lime-400/20 rounded-lg p-4">
-              <p className="text-gray-300 text-sm">{selectedPlan.description}</p>
+            <div className="bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-lg p-4">
+              <p className="text-slate-300 text-sm">{selectedPlan.description}</p>
             </div>
           </div>
         </div>
 
         {/* Center Panel - Earnings Chart */}
-        <div className="bg-black border border-lime-400/30 rounded-xl p-6 backdrop-blur-sm">
+        <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 hover:shadow-[#00d4ff]/10 transition-all duration-500">
           <div className="mb-6">
             <div className="text-3xl font-bold text-white">${investmentAmount}</div>
-            <div className="text-sm text-gray-400">Investment Amount</div>
+            <div className="text-sm text-slate-400">Investment Amount</div>
           </div>
 
           <div className="flex items-center mb-6">
-            <div className="w-4 h-4 bg-lime-400 rounded mr-2"></div>
-            <h3 className="text-lime-400 font-semibold text-lg">Earnings Projection</h3>
+            <div className="w-4 h-4 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded mr-2"></div>
+            <h3 className="text-[#00d4ff] font-semibold text-lg">Earnings Projection</h3>
           </div>
 
           <div className="h-64 md:h-80">
@@ -420,52 +433,52 @@ export default function InvestmentCalculator() {
         </div>
 
         {/* Right Panel - Investment Details */}
-        <div className="bg-black border border-lime-400/30 rounded-xl p-6 backdrop-blur-sm">
+        <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 hover:shadow-[#00d4ff]/10 transition-all duration-500">
           <div className="flex items-center mb-6">
-            <div className="w-4 h-4 bg-lime-400 rounded mr-2"></div>
-            <h3 className="text-lime-400 font-semibold text-lg">Investment Details</h3>
+            <div className="w-4 h-4 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded mr-2"></div>
+            <h3 className="text-[#00d4ff] font-semibold text-lg">Investment Details</h3>
           </div>
 
           <div className="space-y-6">
             <div>
-              <label className="block text-sm text-gray-400 mb-3">Start Date</label>
+              <label className="block text-sm text-slate-400 mb-3">Start Date</label>
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full bg-black/80 border border-lime-400/30 rounded-lg px-4 py-3 text-white focus:border-lime-400 focus:outline-none transition-all duration-300 hover:border-lime-400/50"
+                className="w-full bg-slate-800/80 border border-[#00d4ff]/30 rounded-lg px-4 py-3 text-white focus:border-[#00d4ff] focus:outline-none transition-all duration-300 hover:border-[#00d4ff]/50"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-3">End Date</label>
+              <label className="block text-sm text-slate-400 mb-3">End Date</label>
               <input
                 type="date"
                 value={endDate}
                 readOnly
-                className="w-full bg-black/60 border border-lime-400/20 rounded-lg px-4 py-3 text-gray-400 cursor-not-allowed"
+                className="w-full bg-slate-800/60 border border-[#00d4ff]/20 rounded-lg px-4 py-3 text-slate-400 cursor-not-allowed"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-3">Duration</label>
-              <div className="bg-black/60 border border-gray-600 rounded-lg px-4 py-3">
+              <label className="block text-sm text-slate-400 mb-3">Duration</label>
+              <div className="bg-slate-800/60 border border-slate-600/50 rounded-lg px-4 py-3">
                 <div className="text-right text-xl font-bold text-white">{selectedPlan.duration} days</div>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-3">Investment Amount</label>
-              <div className="bg-black/60 border border-gray-600 rounded-lg px-4 py-3">
-                <div className="text-right text-xl font-bold text-lime-400">${selectedPlan.minInvestment}</div>
-                <div className="text-right text-xs text-gray-400 mt-1">Fixed amount for this plan</div>
+              <label className="block text-sm text-slate-400 mb-3">Investment Amount</label>
+              <div className="bg-slate-800/60 border border-slate-600/50 rounded-lg px-4 py-3">
+                <div className="text-right text-xl font-bold text-[#00d4ff]">${selectedPlan.minInvestment}</div>
+                <div className="text-right text-xs text-slate-400 mt-1">Fixed amount for this plan</div>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-3">Daily Coins</label>
-              <div className="bg-lime-400/10 border border-lime-400/20 rounded-lg px-4 py-3">
-                <div className="text-right text-xl font-bold text-lime-400">{stats.dailyEarning} coins</div>
+              <label className="block text-sm text-slate-400 mb-3">Daily Coins</label>
+              <div className="bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-lg px-4 py-3">
+                <div className="text-right text-xl font-bold text-[#00d4ff]">{stats.dailyEarning} coins</div>
               </div>
             </div>
           </div>
@@ -474,44 +487,44 @@ export default function InvestmentCalculator() {
 
         {/* Bottom Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          <div className="bg-black border border-lime-400/30 rounded-xl p-6 text-center backdrop-blur-sm hover:bg-gray-900/70 transition-colors">
+          <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 text-center hover:shadow-[#00d4ff]/10 hover:scale-105 transition-all duration-500">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-10 h-10 bg-lime-400 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">$</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-slate-900 font-bold text-lg">$</span>
               </div>
             </div>
-            <div className="text-2xl lg:text-3xl font-bold text-lime-400 mb-1">{stats.dailyEarning}</div>
-            <div className="text-sm text-gray-400">Daily Coins</div>
+            <div className="text-2xl lg:text-3xl font-bold text-[#00d4ff] mb-1">{stats.dailyEarning}</div>
+            <div className="text-sm text-slate-400">Daily Coins</div>
           </div>
 
-          <div className="bg-black border border-lime-400/30 rounded-xl p-6 text-center backdrop-blur-sm hover:bg-gray-900/70 transition-colors">
+          <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 text-center hover:shadow-[#00d4ff]/10 hover:scale-105 transition-all duration-500">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-10 h-10 bg-lime-400 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">C</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-slate-900 font-bold text-lg">C</span>
               </div>
             </div>
-            <div className="text-2xl lg:text-3xl font-bold text-lime-400 mb-1">{stats.totalCoins}</div>
-            <div className="text-sm text-gray-400">Total Coins</div>
+            <div className="text-2xl lg:text-3xl font-bold text-[#00d4ff] mb-1">{stats.totalCoins}</div>
+            <div className="text-sm text-slate-400">Total Coins</div>
           </div>
 
-          <div className="bg-black border border-lime-400/30 rounded-xl p-6 text-center backdrop-blur-sm hover:bg-gray-900/70 transition-colors">
+          <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 text-center hover:shadow-[#00d4ff]/10 hover:scale-105 transition-all duration-500">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-10 h-10 bg-lime-400 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">%</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-slate-900 font-bold text-lg">%</span>
               </div>
             </div>
-            <div className="text-2xl lg:text-3xl font-bold text-lime-400 mb-1">{stats.roi}%</div>
-            <div className="text-sm text-gray-400">ROI</div>
+            <div className="text-2xl lg:text-3xl font-bold text-[#00d4ff] mb-1">{stats.roi}%</div>
+            <div className="text-sm text-slate-400">ROI</div>
           </div>
 
-          <div className="bg-black border border-lime-400/30 rounded-xl p-6 text-center backdrop-blur-sm hover:bg-gray-900/70 transition-colors">
+          <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 text-center hover:shadow-[#00d4ff]/10 hover:scale-105 transition-all duration-500">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-10 h-10 bg-lime-400 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">D</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-slate-900 font-bold text-lg">D</span>
               </div>
             </div>
-            <div className="text-2xl lg:text-3xl font-bold text-lime-400 mb-1">{stats.days}</div>
-            <div className="text-sm text-gray-400">Days</div>
+            <div className="text-2xl lg:text-3xl font-bold text-[#00d4ff] mb-1">{stats.days}</div>
+            <div className="text-sm text-slate-400">Days</div>
           </div>
         </div>
       </div>

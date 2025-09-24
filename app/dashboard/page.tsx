@@ -1,46 +1,100 @@
 'use client';
 
-import { FiPlay, FiPause, FiVolume2, FiVolumeX, FiMaximize } from 'react-icons/fi';
-import { useState } from 'react';
-import Icon from '@/components/ui/Icon';
+import { FiBarChart2, FiDollarSign, FiUpload, FiPackage } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
+import QuizSystem from '@/components/Quiz/QuizSystem';
 
 const Dashboard: React.FC = () => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [userPlan, setUserPlan] = useState({
+    id: 'free-tier',
+    dailyCoins: 1, // Default value, will be updated based on user's plan
+    lastQuizCompleted: null as string | null
+  });
+  const [dailyRewardClaimed, setDailyRewardClaimed] = useState(false);
+
+  // Load user data from localStorage on component mount
+  useEffect(() => {
+    const savedUserData = localStorage.getItem('userData');
+    if (savedUserData) {
+      const userData = JSON.parse(savedUserData);
+      setUserPlan(prev => ({
+        ...prev,
+        ...userData.plan,
+        lastQuizCompleted: userData.lastQuizCompleted || null
+      }));
+      
+      // Check if user already completed the quiz today
+      if (userData.lastQuizCompleted) {
+        const lastCompleted = new Date(userData.lastQuizCompleted);
+        const today = new Date();
+        if (
+          lastCompleted.getDate() === today.getDate() &&
+          lastCompleted.getMonth() === today.getMonth() &&
+          lastCompleted.getFullYear() === today.getFullYear()
+        ) {
+          setDailyRewardClaimed(true);
+        }
+      }
+    }
+  }, []);
 
   const stats = [
     {
       title: 'Active Plan',
-      value: 'None',
-      icon: '📊',
-      color: 'text-yellow-400',
-      bgColor: 'bg-yellow-400/10',
-      borderColor: 'border-yellow-400/30'
+      value: userPlan.id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+      icon: <FiBarChart2 className="text-2xl" />,
+      color: 'text-[#00d4ff]',
+      bgColor: 'bg-[#00d4ff]/10',
+      borderColor: 'border-[#00d4ff]/20'
     },
     {
       title: 'Mined Coins',
       value: '0',
-      icon: '⛏️',
-      color: 'text-lime-400',
-      bgColor: 'bg-lime-400/10',
-      borderColor: 'border-lime-400/30'
+      icon: <FiPackage className="text-2xl" />,
+      color: 'text-[#00b8e6]',
+      bgColor: 'bg-[#00b8e6]/10',
+      borderColor: 'border-[#00b8e6]/20'
     },
     {
       title: 'Withdraw Coins',
       value: '0.00',
-      icon: '💰',
-      color: 'text-green-400',
-      bgColor: 'bg-green-400/10',
-      borderColor: 'border-green-400/30'
+      icon: <FiDollarSign className="text-2xl" />,
+      color: 'text-[#0099cc]',
+      bgColor: 'bg-[#0099cc]/10',
+      borderColor: 'border-[#0099cc]/20'
     }
   ];
+
+  const handleQuizComplete = async (success: boolean) => {
+    if (success) {
+      // In a real app, you would make an API call to update the user's balance
+      // For now, we'll just update the local state
+      setDailyRewardClaimed(true);
+      
+      // Update last completed date
+      const today = new Date().toISOString();
+      const updatedUserData = {
+        ...userPlan,
+        lastQuizCompleted: today,
+        // In a real app, you would also update the user's coin balance here
+      };
+      
+      setUserPlan(updatedUserData);
+      
+      // Save to localStorage
+      localStorage.setItem('userData', JSON.stringify({
+        ...JSON.parse(localStorage.getItem('userData') || '{}'),
+        lastQuizCompleted: today
+      }));
+    }
+  };
 
   return (
     <div className="space-y-8">
       {/* Welcome Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-gray-400">Welcome back! Here&apos;s your mining overview.</p>
+        <p className="text-[#94a3b8]">Welcome back! Here&apos;s your daily crypto quiz.</p>
       </div>
 
       {/* Stats Cards */}
@@ -50,8 +104,8 @@ const Dashboard: React.FC = () => {
             key={index}
             className={`
               relative rounded-2xl border ${stat.borderColor} p-6 
-              backdrop-blur-sm bg-black/40 hover:bg-black/60 
-              transition-all duration-300 hover:scale-[1.02]
+              backdrop-blur-sm bg-[#1e293b] hover:bg-[#1e293b]/80 
+              transition-all duration-300 hover:scale-[1.02] shadow-lg
               ${stat.bgColor}
             `}
           >
@@ -60,7 +114,7 @@ const Dashboard: React.FC = () => {
               <div className={`w-2 h-2 rounded-full ${stat.color.replace('text-', 'bg-')}`}></div>
             </div>
             <div>
-              <div className="text-gray-400 text-sm mb-1">{stat.title}</div>
+              <div className="text-[#94a3b8] text-sm mb-1">{stat.title}</div>
               <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
             </div>
             
@@ -76,117 +130,60 @@ const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         {/* Quick Start Guide */}
         <div className="xl:col-span-2">
-          <div className="rounded-2xl border border-lime-400/30 p-6 backdrop-blur-sm bg-black/40">
-            <h2 className="text-xl font-bold text-white mb-6">Quick Start Guide</h2>
+          <div className="rounded-2xl border border-[#00d4ff]/20 p-6 backdrop-blur-sm bg-[#1e293b]">
+            <h2 className="text-xl font-bold text-white mb-6">Daily Crypto Quiz</h2>
             
-            {/* Video Player */}
-            <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-orange-200 via-yellow-100 to-orange-300 aspect-video mb-4">
-              {/* Video Placeholder with Illustration */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                {/* Desk Scene */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                  {/* Background elements */}
-                  <div className="absolute top-8 left-8 w-16 h-20 bg-blue-200 rounded-lg opacity-80"></div> {/* Lamp */}
-                  <div className="absolute top-12 left-10 w-12 h-8 bg-yellow-300 rounded-full"></div> {/* Lamp light */}
-                  
-                  {/* Desk */}
-                  <div className="absolute bottom-0 left-0 right-0 h-24 bg-amber-800 rounded-t-3xl"></div>
-                  
-                  {/* Monitor */}
-                  <div className="relative z-10 w-32 h-20 bg-gray-800 rounded-lg border-4 border-gray-700">
-                    <div className="w-full h-16 bg-blue-400 rounded-sm m-1 flex items-center justify-center">
-                      <div className="w-8 h-8 bg-white rounded opacity-80"></div>
-                    </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-700 rounded-full"></div>
-                    <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-2 bg-gray-700 rounded-full"></div>
+            <div className="mb-4">
+              {dailyRewardClaimed ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
                   </div>
-                  
-                  {/* Character */}
-                  <div className="absolute bottom-24 right-20 z-10">
-                    {/* Head */}
-                    <div className="w-12 h-12 bg-orange-300 rounded-full relative mb-1">
-                      <div className="absolute top-3 left-2 w-2 h-2 bg-black rounded-full"></div>
-                      <div className="absolute top-3 right-2 w-2 h-2 bg-black rounded-full"></div>
-                      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-black rounded-full"></div>
-                      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-black rounded-full"></div>
-                    </div>
-                    {/* Body */}
-                    <div className="w-16 h-20 bg-blue-500 rounded-lg relative">
-                      <div className="absolute top-2 left-2 w-3 h-8 bg-orange-300 rounded-full"></div>
-                      <div className="absolute top-2 right-2 w-3 h-8 bg-orange-300 rounded-full"></div>
-                    </div>
-                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Quiz Completed for Today!</h3>
+                  <p className="text-gray-400 mb-6">You&apos;ve earned your {userPlan.dailyCoins} coin{userPlan.dailyCoins !== 1 ? 's' : ''} for today.</p>
+                  <p className="text-sm text-gray-500">Come back tomorrow for a new quiz!</p>
                 </div>
-              </div>
-
-              {/* Video Controls */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <button
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                      onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-                    >
-                      <Icon icon={isVideoPlaying ? FiPause : FiPlay} size="md" className="text-white ml-0.5" />
-                    </button>
-                    
-                    <button
-                      className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                      onClick={() => setIsMuted(!isMuted)}
-                    >
-                      <Icon icon={isMuted ? FiVolumeX : FiVolume2} size="sm" className="text-white" />
-                    </button>
-
-                    <div className="text-white text-sm">0:00 / 2:15</div>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <button className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                      <Icon icon={FiMaximize} size="sm" className="text-white" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="mt-2 w-full bg-white/20 rounded-full h-1">
-                  <div className="bg-lime-400 h-1 rounded-full w-0 transition-all duration-300"></div>
-                </div>
-              </div>
+              ) : (
+                <QuizSystem 
+                  userPlan={userPlan} 
+                  onComplete={handleQuizComplete} 
+                />
+              )}
             </div>
-
-            <p className="text-gray-300 text-sm text-center">
-              Learn how to get started and deposit coins.
-            </p>
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="space-y-6">
-          {/* Mine Now Button */}
-          <div className="rounded-2xl border border-lime-400/30 p-6 backdrop-blur-sm bg-black/40 text-center">
-            <div className="mb-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-lime-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">⛏️</span>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">Start Mining</h3>
-              <p className="text-gray-400 text-sm">Begin your mining journey today</p>
-            </div>
-            <button className="w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-500 hover:to-green-600 text-black font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
-              MINE NOW
-            </button>
-          </div>
-
           {/* Deposit Button */}
           <div className="rounded-2xl border border-blue-400/30 p-6 backdrop-blur-sm bg-black/40 text-center">
             <div className="mb-4">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">💰</span>
+                <FiUpload className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Make Deposit</h3>
               <p className="text-gray-400 text-sm">Fund your account to start earning</p>
             </div>
             <button className="w-full bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
               DEPOSIT NOW
+            </button>
+          </div>
+
+          {/* Upgrade Plan */}
+          <div className="rounded-2xl border border-purple-400/30 p-6 backdrop-blur-sm bg-black/40 text-center">
+            <div className="mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Upgrade Plan</h3>
+              <p className="text-gray-400 text-sm">Earn more coins with a better plan</p>
+            </div>
+            <button className="w-full bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+              UPGRADE NOW
             </button>
           </div>
         </div>

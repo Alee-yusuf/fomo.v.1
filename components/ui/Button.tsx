@@ -1,6 +1,3 @@
-// TODO: Customize button variants and colors to match brand
-// TODO: Add loading state and disabled state styling
-
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 import { clsx } from 'clsx';
 
@@ -12,13 +9,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, children, disabled, ...props }, ref) => {
-    const baseClasses = 'inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+    const baseClasses = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
     
     const variants = {
-      primary: 'bg-blue-600 text-white hover:bg-blue-700',
-      secondary: 'bg-gray-600 text-white hover:bg-gray-700',
-      outline: 'border border-gray-300 bg-transparent hover:bg-gray-50',
-      ghost: 'hover:bg-gray-100'
+      primary: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 shadow-sm hover:shadow-md',
+      secondary: 'bg-gray-600 text-white hover:bg-gray-700 active:bg-gray-800 shadow-sm hover:shadow-md',
+      outline: 'border-2 border-primary-500 text-primary-600 bg-transparent hover:bg-primary-50 active:bg-primary-100',
+      ghost: 'text-primary-600 hover:bg-primary-50 active:bg-primary-100'
     };
     
     const sizes = {

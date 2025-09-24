@@ -1,10 +1,8 @@
-// TODO: Replace sample plans with actual investment plans from API
-// TODO: Integrate with payment system
-
 'use client';
 
 import { useState } from 'react';
 import PlanCard, { Plan } from './PlanCard';
+import { FiCircle, FiStar, FiHexagon } from 'react-icons/fi';
 
 interface PlanCategory {
   id: string;
@@ -234,14 +232,14 @@ const PlansSection: React.FC = () => {
   const getTabColors = (categoryId: string, isActive: boolean) => {
     const colors = {
       silver: isActive 
-        ? 'bg-gray-400 text-black' 
-        : 'text-gray-400 hover:text-gray-300 hover:bg-gray-800',
+        ? 'bg-gradient-to-r from-slate-400 to-slate-500 text-slate-900 shadow-lg' 
+        : 'text-slate-300 hover:text-white hover:bg-slate-700/50',
       gold: isActive 
-        ? 'bg-yellow-400 text-black' 
-        : 'text-yellow-400 hover:text-yellow-300 hover:bg-yellow-900/20',
+        ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 shadow-lg' 
+        : 'text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10',
       diamond: isActive 
-        ? 'bg-blue-400 text-white' 
-        : 'text-blue-400 hover:text-blue-300 hover:bg-blue-900/20'
+        ? 'bg-gradient-to-r from-[#00d4ff] to-[#0099cc] text-slate-900 shadow-lg shadow-[#00d4ff]/25' 
+        : 'text-[#00d4ff] hover:text-white hover:bg-[#00d4ff]/10'
     };
     return colors[categoryId as keyof typeof colors] || colors.silver;
   };
@@ -249,25 +247,13 @@ const PlansSection: React.FC = () => {
   const getIconComponent = (iconType: string) => {
     switch (iconType) {
       case 'silver':
-        return (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-          </svg>
-        );
+        return <FiCircle className="w-5 h-5" />;
       case 'gold':
-        return (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        );
+        return <FiStar className="w-5 h-5" />;
       case 'diamond':
-        return (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 2l2 6h8l2-6h-12zm-2 8l6 12 6-12H4zm1.5-2h13L17 6H7l-1.5 2z"/>
-          </svg>
-        );
+        return <FiHexagon className="w-5 h-5" />;
       default:
-        return null;
+        return <FiCircle className="w-5 h-5" />;
     }
   };
 
@@ -278,28 +264,58 @@ const PlansSection: React.FC = () => {
   };
 
   return (
-    <section id="plans" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4">
+    <section id="plans" className="py-20 relative overflow-hidden" style={{ backgroundColor: '#0f172a' }}>
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-20 w-96 h-96 rounded-full blur-3xl opacity-8" 
+             style={{ background: 'radial-gradient(circle, #00d4ff 0%, transparent 70%)' }}></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 rounded-full blur-3xl opacity-6" 
+             style={{ background: 'radial-gradient(circle, #0099cc 0%, transparent 70%)' }}></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Investment Plans
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            Investment <span style={{ 
+              background: 'linear-gradient(135deg, #00d4ff 0%, #0099cc 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>Plans</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
             Our diverse multi-tiered investment plans give you the freedom to choose exactly how you invest and earn.
           </p>
         </div>
 
         {/* Tabs Navigation */}
         <div className="flex justify-center mb-12">
-          <div className="rounded-full p-1 border border-gray-700" style={{backgroundColor: '#1a1a1a'}}>
-            <div className="flex space-x-1">
-              {planCategories.map((category) => (
+          <div className="relative rounded-2xl p-1.5 border border-[#00d4ff]/20 bg-slate-800/40 backdrop-blur-sm">
+            <div className="flex space-x-2 relative">
+              {/* Sliding Background Indicator */}
+              <div 
+                className="absolute top-0 bottom-0 rounded-xl transition-all duration-500 ease-out"
+                style={{
+                  left: `${planCategories.findIndex(cat => cat.id === activeTab) * (100 / planCategories.length)}%`,
+                  width: `${100 / planCategories.length}%`,
+                  background: activeTab === 'silver' 
+                    ? 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)'
+                    : activeTab === 'gold'
+                    ? 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)'
+                    : 'linear-gradient(135deg, #00d4ff 0%, #0099cc 100%)',
+                  boxShadow: activeTab === 'diamond' ? '0 0 20px rgba(0, 212, 255, 0.3)' : 'none'
+                }}
+              />
+              
+              {planCategories.map((category, index) => (
                 <button
                   key={category.id}
                   onClick={() => setActiveTab(category.id)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-200 flex items-center space-x-2 ${
-                    getTabColors(category.id, activeTab === category.id)
+                  className={`relative z-10 px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center space-x-3 ${
+                    activeTab === category.id 
+                      ? 'text-slate-900' 
+                      : getTabColors(category.id, false)
                   }`}
                 >
                   {getIconComponent(category.icon)}
@@ -310,24 +326,7 @@ const PlansSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Tab Content */}
-        <div className="text-center mb-8">
-          {getCurrentCategory() && (
-            <>
-              <div className="flex items-center justify-center space-x-3 mb-2">
-                <div className={`${getCurrentCategory()?.id === 'silver' ? 'text-gray-400' : getCurrentCategory()?.id === 'gold' ? 'text-yellow-400' : 'text-blue-400'}`}>
-                  {getIconComponent(getCurrentCategory()!.icon)}
-                </div>
-                <h3 className="text-2xl font-bold text-white">
-                  {getCurrentCategory()!.name}
-                </h3>
-              </div>
-              <p className="text-gray-300 max-w-2xl mx-auto">
-                {getCurrentCategory()!.description}
-              </p>
-            </>
-          )}
-        </div>
+
 
         {/* Plans Grid - Centered */}
         <div className="w-full px-4">

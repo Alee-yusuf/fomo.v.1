@@ -36,39 +36,54 @@ const CoreFeatures = () => {
   ];
 
   return (
-    <section className="bg-black py-16 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section id="features" className="py-20 relative overflow-hidden" style={{ backgroundColor: '#0f172a' }}>
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-20 w-96 h-96 rounded-full blur-3xl opacity-8" 
+             style={{ background: 'radial-gradient(circle, #00d4ff 0%, transparent 70%)' }}></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 rounded-full blur-3xl opacity-6" 
+             style={{ background: 'radial-gradient(circle, #0099cc 0%, transparent 70%)' }}></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            CORE <span className="text-lime-400">FEATURES</span>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            Core <span style={{ 
+              background: 'linear-gradient(135deg, #00d4ff 0%, #0099cc 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>Features</span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            OUR CORE FEATURES THAT MAKE FOMOFI UNIQUE.
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Our core features that make FÔMOFI unique and powerful for your investment journey.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
               <div
                 key={index}
-                className="bg-black border border-lime-400/30 rounded-lg p-6 hover:border-lime-400/50 transition-colors duration-300"
+                className="bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-[#00d4ff]/20 shadow-2xl p-6 hover:shadow-[#00d4ff]/10 hover:scale-105 hover:border-[#00d4ff]/40 transition-all duration-500 group"
               >
                 {/* Icon */}
-                <div className="mb-4">
-                  <IconComponent className="w-8 h-8 text-lime-400" />
+                <div className="mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-[#00d4ff]/25 transition-all duration-300">
+                    <IconComponent className="w-6 h-6 text-slate-900" />
+                  </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lime-400 text-xl font-semibold mb-3">
+                <h3 className="text-[#00d4ff] text-xl font-bold mb-4 group-hover:text-white transition-colors duration-300">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
                   {feature.description}
                 </p>
               </div>
