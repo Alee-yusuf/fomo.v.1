@@ -30,7 +30,7 @@ const PlansSection: React.FC = () => {
           name: 'Silver Starter',
           description: 'Perfect entry point for new investors',
           minInvestment: 20,
-          maxInvestment: 20,
+          maxInvestment: 50, // 20 + (1 coin/day * 30 days)
           apy: 0, // Will show coins instead
           duration: 30,
           features: [
@@ -47,7 +47,7 @@ const PlansSection: React.FC = () => {
           name: 'Silver Basic',
           description: 'Extended silver investment plan',
           minInvestment: 50,
-          maxInvestment: 50,
+          maxInvestment: 140, // 50 + (1 coin/day * 90 days)
           apy: 0,
           duration: 90,
           features: [
@@ -64,7 +64,7 @@ const PlansSection: React.FC = () => {
           name: 'Silver Plus',
           description: 'Enhanced silver plan with double rewards',
           minInvestment: 100,
-          maxInvestment: 100,
+          maxInvestment: 300, // 100 + (2 coins/day * 100 days)
           apy: 0,
           duration: 100,
           features: [
@@ -81,7 +81,7 @@ const PlansSection: React.FC = () => {
           name: 'Silver Pro',
           description: 'Premium silver investment option',
           minInvestment: 200,
-          maxInvestment: 200,
+          maxInvestment: 680, // 200 + (4 coins/day * 120 days)
           apy: 0,
           duration: 120,
           features: [
@@ -108,7 +108,7 @@ const PlansSection: React.FC = () => {
           name: 'Gold Basic',
           description: 'Start earning Gold coins',
           minInvestment: 500,
-          maxInvestment: 500,
+          maxInvestment: 590, // 500 + (1 coin/day * 90 days)
           apy: 0,
           duration: 90,
           features: [
@@ -125,7 +125,7 @@ const PlansSection: React.FC = () => {
           name: 'Gold Plus',
           description: 'Double Gold coin rewards',
           minInvestment: 1000,
-          maxInvestment: 1000,
+          maxInvestment: 1200, // 1000 + (2 coins/day * 100 days)
           apy: 0,
           duration: 100,
           features: [
@@ -143,7 +143,7 @@ const PlansSection: React.FC = () => {
           name: 'Gold Pro',
           description: 'Maximum Gold coin earnings',
           minInvestment: 2000,
-          maxInvestment: 2000,
+          maxInvestment: 2480, // 2000 + (4 coins/day * 120 days)
           apy: 0,
           duration: 120,
           features: [
@@ -169,7 +169,7 @@ const PlansSection: React.FC = () => {
           name: 'Diamond Basic',
           description: 'Enter the Diamond tier',
           minInvestment: 5000,
-          maxInvestment: 5000,
+          maxInvestment: 5090, // 5000 + (1 coin/day * 90 days)
           apy: 0,
           duration: 90,
           features: [
@@ -186,7 +186,7 @@ const PlansSection: React.FC = () => {
           name: 'Diamond Plus',
           description: 'Enhanced Diamond rewards',
           minInvestment: 10000,
-          maxInvestment: 10000,
+          maxInvestment: 10200, // 10000 + (2 coins/day * 100 days)
           apy: 0,
           duration: 100,
           features: [
@@ -203,7 +203,7 @@ const PlansSection: React.FC = () => {
           name: 'Diamond Pro',
           description: 'Ultimate Diamond investment',
           minInvestment: 20000,
-          maxInvestment: 20000,
+          maxInvestment: 20480, // 20000 + (4 coins/day * 120 days)
           apy: 0,
           duration: 120,
           features: [

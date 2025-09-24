@@ -7,104 +7,220 @@ import { Star, ChevronLeft, ChevronRight, Users, DollarSign, TrendingUp } from '
 
 const Testimonials = () => {
   const [testimonials] = useState([
+    // 1. English - Short praise
     {
       id: '1',
-      name: 'Ahmed Hassan',
-      role: 'Software Engineer',
-      avatar: 'AH',
+      name: 'Sarah',
+      avatar: 'SR',
       rating: 5,
-      content: 'Yaar, honestly speaking, FÔMOFI has been a game changer for me. Main ne 6 months pehle start kiya tha and ab tak ka experience bilkul solid hai. Daily mining ka concept bohot easy hai aur returns bhi consistent aa rahe hain.',
-      investment: '$3,000',
-      returns: '$720',
-      duration: '6 months'
-    },
-    {
-      id: '2',
-      name: 'Fatima Khan',
-      role: 'Business Owner',
-      avatar: 'FK',
-      rating: 5,
-      content: 'Main ne bohot sare platforms try kiye hain but FÔMOFI ka system sabse transparent hai. Customer support bhi bahut responsive hai. Meri family ko bhi recommend kiya hai aur sab khush hain.',
-      investment: '$5,500',
-      returns: '$1,320',
-      duration: '8 months'
-    },
-    {
-      id: '3',
-      name: 'Muhammad Ali',
-      role: 'Marketing Manager',
-      avatar: 'MA',
-      rating: 5,
-      content: 'Bhai, initially main skeptical tha but after seeing consistent returns for 4 months, ab main confident hun. Referral program se extra income bhi mil rahi hai. Highly recommended hai!',
-      investment: '$2,200',
-      returns: '$440',
+      content: 'Good job team!',
+      investment: '$2,000',
+      returns: '$600',
       duration: '4 months'
     },
+    
+    // 2. Urdu - Gifts for family
     {
-      id: '4',
-      name: 'Ayesha Malik',
-      role: 'Teacher',
-      avatar: 'AM',
+      id: '2',
+      name: 'Sara Khan',
+      avatar: 'SK',
       rating: 5,
-      content: 'As a teacher, meri salary limited hai but FÔMOFI se jo passive income aa rahi hai, woh mere monthly expenses mein bohot help kar rahi hai. Simple hai aur secure bhi.',
-      investment: '$1,800',
-      returns: '$540',
-      duration: '10 months'
-    },
-    {
-      id: '5',
-      name: 'Usman Sheikh',
-      role: 'Freelancer',
-      avatar: 'US',
-      rating: 5,
-      content: 'Freelancing ke saath saath yeh platform use kar raha hun. Daily tap karna just 2 minutes ka kaam hai aur monthly returns dekh kar khushi hoti hai. Team ka support bhi excellent hai.',
-      investment: '$4,200',
-      returns: '$1,050',
-      duration: '7 months'
-    },
-    {
-      id: '6',
-      name: 'Zainab Ahmed',
-      role: 'Doctor',
-      avatar: 'ZA',
-      rating: 5,
-      content: 'Medical field mein busy schedule hai but FÔMOFI ka simple interface makes it easy to manage. Returns consistent hain aur withdrawal process bhi smooth hai. Definitely worth it!',
-      investment: '$6,800',
-      returns: '$1,632',
-      duration: '9 months'
-    },
-    {
-      id: '7',
-      name: 'Bilal Raza',
-      role: 'Shopkeeper',
-      avatar: 'BR',
-      rating: 5,
-      content: 'Dukaan ke saath saath yeh investment kar raha hun. Pehle dar tha ke online investment safe hai ya nahi, but FÔMOFI ne trust build kiya hai. Har month regular returns mil rahe hain.',
-      investment: '$2,800',
-      returns: '$672',
+      content: 'Pehli baar apne bachon ko birthday par wo cycle dilai jo wo bahut din se maang rahe thay! FÔMOFI ki waja se ab main apnay ghar walon ko khush karsakti hoon. Verification sirf 20 minute mein ho gaya tha!',
+      investment: '$3,000',
+      returns: '$900',
       duration: '5 months'
     },
+
+    // 3. English - More free time
     {
-      id: '8',
-      name: 'Sana Tariq',
-      role: 'Housewife',
-      avatar: 'ST',
+      id: '3',
+      name: 'Ali Hassan',
+      avatar: 'AH',
+      rating: 4,
+      content: 'As a teacher, I needed extra income without extra work. FÔMOFI gives me that! Just 2 minutes daily, and I earn while focusing on my students. The app is simple and reliable.',
+      investment: '$2,000',
+      returns: '$600',
+      duration: '4 months'
+    },
+
+    // 4. Urdu - Travel
+    {
+      id: '4',
+      name: 'Zainab Malik',
+      avatar: 'ZM',
       rating: 5,
-      content: 'Ghar baithe paise kamane ka yeh best tarika hai. Husband ki permission se start kiya tha aur ab woh bhi impressed hain. Simple hai aur safe bhi. Recommend karti hun sabko!',
-      investment: '$1,500',
-      returns: '$450',
+      content: 'Maine apne pehle 4 mahine ke profits se Murree ka family tour karaya! Ab tak ka best experience raha. App thoda slow hota hai kabhi kabhi lekin paise time pe aajate hain.',
+      investment: '$4,500',
+      returns: '$1,350',
       duration: '6 months'
     },
+
+    // 5. English - Helping family
+    {
+      id: '5',
+      name: 'Usman Khan',
+      avatar: 'UK',
+      rating: 5,
+      content: 'Being the eldest son, family responsibilities were overwhelming. Now, my FÔMOFI earnings help me support my siblings\' education. The best investment I\'ve ever made!',
+      investment: '$6,000',
+      returns: '$1,800',
+      duration: '7 months'
+    },
+
+    // 6. Urdu - Short and sweet
+    {
+      id: '6',
+      name: 'Kamran',
+      avatar: 'KR',
+      rating: 5,
+      content: 'Mashallah! Bohat acha!',
+      investment: '$1,000',
+      returns: '$300',
+      duration: '3 months'
+    },
+
+    // 7. English - Side income
+    {
+      id: '7',
+      name: 'Bilal Ahmed',
+      avatar: 'BA',
+      rating: 5,
+      content: 'As a freelancer, income was never consistent. FÔMOFI gives me that stability. Even in slow months, I have this passive income. The 15-minute verification was a pleasant surprise!',
+      investment: '$4,000',
+      returns: '$1,200',
+      duration: '6 months'
+    },
+
+    // 8. Urdu - Daily expenses
+    {
+      id: '8',
+      name: 'Fatima Noor',
+      avatar: 'FN',
+      rating: 4,
+      content: 'Ghar ka kharcha chalanay mein bohat madad mili hai FÔMOFI se. Har mahine 30-35k ka profit aata hai jo groceries aur bills mein kaam aata hai. Verification 25 minute mein ho gaya tha.',
+      investment: '$3,500',
+      returns: '$1,050',
+      duration: '5 months'
+    },
+
+    // 7. English - Side income
+    {
+      id: '7',
+      name: 'Bilal Ahmed',
+      avatar: 'BA',
+      rating: 5,
+      content: 'As a freelancer, income was never consistent. FÔMOFI gives me that stability. Even in slow months, I have this passive income. The 15-minute verification was a pleasant surprise!',
+      investment: '$4,000',
+      returns: '$1,200',
+      duration: '6 months'
+    },
+
+    // 8. Urdu - Mixed review
+    {
+      id: '8',
+      name: 'Sana Khan',
+      avatar: 'SK',
+      rating: 3,
+      content: 'Thik thak hai, verification 1 ghaye mein hua tha. Paisay to time pe aajate hain lekin app kabhi kabhi hang hota hai. Support ne 1 din baad reply diya tha.',
+      investment: '$2,500',
+      returns: '$750',
+      duration: '4 months'
+    },
+
+    // 9. English - Business investment
     {
       id: '9',
-      name: 'Tariq Mahmood',
-      role: 'Retired Officer',
+      name: 'Tariq Mehmood',
       avatar: 'TM',
       rating: 5,
-      content: 'Retirement ke baad pension ke saath yeh additional income bohot helpful hai. Age mein technology samajhna mushkil tha but FÔMOFI ka interface user-friendly hai. Satisfied hun bilkul.',
-      investment: '$7,500',
-      returns: '$2,250',
-      duration: '12 months'
+      content: 'Used my FÔMOFI profits to start a small home-based catering business! The platform is so reliable that I can focus on my new venture with peace of mind.',
+      investment: '$5,000',
+      returns: '$1,500',
+      duration: '6 months'
+    },
+
+    // 10. Urdu - Student success
+    {
+      id: '10',
+      name: 'Ayesha Riaz',
+      avatar: 'AR',
+      rating: 5,
+      content: 'Medical ki student hoon, FÔMOFI se jo paise milte hain wo meri books aur hostel fees mein kaam aate hain. Bohat acha hai, verification bhi 15 minute mein ho gaya tha!',
+      investment: '$1,500',
+      returns: '$450',
+      duration: '3 months'
+    },
+
+    // 11. English - Retirement fund
+    {
+      id: '11',
+      name: 'Khalid Mahmood',
+      avatar: 'KM',
+      rating: 5,
+      content: 'Retired now, and FÔMOFI gives me a sense of financial security. The monthly returns cover my medicines and some leisure activities. Simple to use at any age!',
+      investment: '$7,000',
+      returns: '$2,100',
+      duration: '9 months'
+    },
+
+    // 12. Urdu - Simple appreciation
+    {
+      id: '12',
+      name: 'Imran',
+      avatar: 'IM',
+      rating: 5,
+      content: 'Kamal ka platform hai!',
+      investment: '$3,000',
+      returns: '$900',
+      duration: '5 months'
+    },
+    
+    // 13. Urdu - Mixed review
+    {
+      id: '13',
+      name: 'Nadia Shah',
+      avatar: 'NS',
+      rating: 4,
+      content: 'Acha hai lekin withdrawal process thora complicated hai. Pehli baar 24 hours lag gaye the paise anay mein. Lekin ab regularly 2-3 ghante lagte hain. Paisa aata hai to theek hai.',
+      investment: '$3,000',
+      returns: '$900',
+      duration: '5 months'
+    },
+
+    // 13. English - Wedding savings
+    {
+      id: '13',
+      name: 'Asad Ali',
+      avatar: 'AA',
+      rating: 5,
+      content: 'Saving for my sister\'s wedding was tough until I found FÔMOFI. In just 6 months, I\'ve earned enough to cover half the wedding expenses. The platform is a lifesaver!',
+      investment: '$8,000',
+      returns: '$2,400',
+      duration: '6 months'
+    },
+
+    // 14. Urdu - Housewife's success
+    {
+      id: '14',
+      name: 'Sadia Akhtar',
+      avatar: 'SA',
+      rating: 5,
+      content: 'Ghar baithe paise kamana asaan nahi hota, lekin FÔMOFI ne mumkin kar diya! Ab main apne liye bhi kuch kharid sakti hoon bina kisi se maange. Verification 30 minute mein ho gaya tha.',
+      investment: '$2,000',
+      returns: '$600',
+      duration: '4 months'
+    },
+
+    // 15. English - Final success story
+    {
+      id: '15',
+      name: 'Faisal Khan',
+      avatar: 'FK',
+      rating: 5,
+      content: 'From skeptic to believer! Started with $100 just to test, now I\'m earning enough to cover my car EMI. The best financial decision I made last year. Verification was done in 20 minutes!',
+      investment: '$5,000',
+      returns: '$1,500',
+      duration: '6 months'
     }
   ]);
 
@@ -191,9 +307,6 @@ const Testimonials = () => {
                     <div>
                       <div className="font-semibold text-white">
                         {testimonial.name}
-                      </div>
-                      <div className="text-sm text-slate-400">
-                        {testimonial.role}
                       </div>
                     </div>
                   </div>

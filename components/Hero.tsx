@@ -65,7 +65,6 @@ const Hero: React.FC = () => {
                 animation: 'gradient 3s ease infinite'
               }}>
                 Mine Rewards
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-[#00d4ff]/30 rounded-full animate-ping"></div>
               </h2>
               
               <h3 className="text-2xl lg:text-3xl font-semibold text-slate-300">
@@ -95,8 +94,14 @@ const Hero: React.FC = () => {
               <button 
                 className="border-2 text-slate-300 font-semibold px-8 py-3.5 rounded-lg transition-all duration-300 hover:text-[#0f172a] hover:scale-105 relative overflow-hidden group"
                 style={{ borderColor: '#00d4ff' }}
+                onClick={() => {
+                  const plansSection = document.getElementById('plans');
+                  if (plansSection) {
+                    plansSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
-                <span className="relative z-10">See Pros</span>
+                <span className="relative z-10">See Plans</span>
                 <div className="absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
                      style={{ background: 'linear-gradient(135deg, #00d4ff 0%, #0099cc 100%)' }}></div>
               </button>
@@ -247,10 +252,6 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Subtle Professional Accents */}
-              <div className="absolute -top-2 -right-2 w-4 h-4 bg-green-400/30 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-orange-400/30 rounded-full animate-pulse delay-1000"></div>
               
               {/* Professional Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-green-400/5 to-orange-400/5 rounded-xl blur-xl -z-10"></div>
